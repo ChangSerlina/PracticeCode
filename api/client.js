@@ -3,6 +3,10 @@
 * Ref: https://reurl.cc/jWW8X1
 */
 
+// 前提：需確認已安裝 Node.js
+// 新增並進入 api 資料夾
+// 安裝 request 模組，執行：$ npm install request
+
 const request = require('request');
 request('https://reqres.in/api/users', function (error, response, body) {
     // console.error('error:', error); // Print the error if one occurred
@@ -13,3 +17,5 @@ request('https://reqres.in/api/users', function (error, response, body) {
     console.log('轉成 JS 物件 — — — — — — — — — — ');
     console.log(JSON.parse(body));
 });
+
+// 用 Node.js 執行：$ node .\client.js
