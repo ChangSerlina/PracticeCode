@@ -1,1 +1,1 @@
-練習程式碼：API、PHP、LDAP
+練習程式碼：API、PHP
