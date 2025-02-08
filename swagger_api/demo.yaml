@@ -1,0 +1,60 @@
+openapi: 3.0.0
+info:
+  title: 簡單的 GET API
+  description: 這是一個示範 GET 方法的 Swagger API 文件
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000
+    description: 本地開發環境
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  responses:
+    UnauthorizedError:
+      description: Access token is missing or invalid
+
+paths:
+  /users/{id}:
+    get:
+      security:
+        - bearerAuth: []
+      summary: 取得單一使用者資訊
+      description: 透過 ID 取得使用者資訊
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: 使用者 ID
+        - in: query
+          name: metadata
+          schema:
+            type: boolean
+          description: 是否取得額外的 metadata
+      responses:
+        "200":
+          description: 成功取得使用者資訊
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  name:
+                    type: string
+                    example: "John Doe"
+                  email:
+                    type: string
+                    example: "john@example.com"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "404":
+          description: 找不到該使用者
